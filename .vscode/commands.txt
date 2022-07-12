@@ -1,0 +1,6 @@
+mkdir calorie-counter-server
+cd calorie-counter-server
+nvm list
+nmv use stable v17.7.2
+yarn init
+yarn add express
