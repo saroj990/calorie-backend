@@ -1,4 +1,4 @@
-import Item from './calorie/item';
+import Item from './item/item';
 import path from 'path';
 import csv from 'csvtojson';
 const seed = async () => {
