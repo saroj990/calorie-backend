@@ -1,10 +1,11 @@
 import seederService from '../seeder-service';
 import ItemService from './item-service';
-
+import ItemValidatorSchema from './item-validator';
 const createItem = async (req, res) => {
   try {
-    const item = await ItemService.createItem(req.body);
-    return res.json(item);
+    const item  = await ItemValidatorSchema.validateAsync(req.body);
+    const created = await ItemService.createItem(item);
+    return res.json(created);
   } catch (error) {
     console.log(error);
     return res.status(500).send('unable to create item');
@@ -28,8 +29,9 @@ const getItemById = async (req, res) => {
   }
 };
 
-const deleteItem = async (id) => {
+const deleteItem = async (req, res) => {
   try {
+    const { id } = req.params;
     if (!id) throw new Error('id is empty, deletion not allowed');
     const item = await ItemService.deleteItem(id);
     return res.json(item);
@@ -52,19 +54,9 @@ const seed = async (req, res) => {
 const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log('req.body: ', req.body);
-    const { carbohydrates, fat, protein, fiber, calories, name, amount } =
-      req.body;
     if (!id) throw new Error('id or payload is empty');
-    const updated = await ItemService.updateItem(id, {
-      carbohydrates,
-      fat,
-      protein,
-      fiber,
-      calories,
-      name,
-      amount,
-    });
+    const item  = await ItemValidatorSchema.validateAsync(req.body);
+    const updated = await ItemService.updateItem(id, item);
     return res.json(updated);
   } catch (error) {
     console.log(error);
