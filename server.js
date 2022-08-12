@@ -4,17 +4,18 @@ import routes from './routes';
 import mongo from './util/mongo';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const corsOptions = {
- origin: ['http://127.0.0.1:3000', 'http://localhost:3000' ],
- optionsSuccessStatus: 200
+  origin: ['http://127.0.0.1:3000', 'http://localhost:3000'],
+  optionsSuccessStatus: 200,
 };
 
 // enable cors requests
 const app = express();
-const port = 4000;
-const basePath = '/api';
-
+const port = process.env.PORT || 4000;
+const basePath = `/${process.env.API_PATH}`;
 
 // initialize mongo connection
 mongo();
