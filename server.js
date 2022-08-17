@@ -5,7 +5,6 @@ import mongo from './util/mongo';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
-import unAuthenticatedRoutes from './routes/unAuthenticatedRoutes';
 
 // enable cors requests
 const corsOptions = {
@@ -28,9 +27,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
-
-app.use('/profile', unAuthenticatedRoutes);
-
 app.use(basePath, routes);
 
 app.get('/', (req, res) => {
