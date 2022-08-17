@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
 // put this inside config
-const host = '127.0.0.1';
-const port = 27017;
-const dbName = 'calorie-counter';
+const host = process.env.host || '127.0.0.1';
+const port = process.env.port || 27017;
+const dbName = process.env.dbName || 'calorie-counter';
 
 async function main() {
   try {
