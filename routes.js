@@ -1,10 +1,9 @@
 import express from 'express';
-import calorieRoutes from './src/item/item-routes';
-import mealRoutes from './src/calorie/meal-route';
+import authenticatedRoutes from './routes/authenticatedRoutes';
+import { isLoggedIn } from './middlewares/auth';
 
 const router = express.Router();
-const routes = [calorieRoutes, mealRoutes];
 
-router.use('/', ...routes);
+router.use('/', isLoggedIn, ...authenticatedRoutes);
 
 export default router;
