@@ -34,13 +34,14 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
+    console.log('login was called');
     const { email, password } = req.body;
 
     if (!email || !password) {
       throw new Error(Error.INVALID_INPUTS);
     }
 
-    const user = await User.findOne({ email }).exec();
+    const user = await UserService.findOneUser({ email });
 
     if (
       isEmpty(user) ||
