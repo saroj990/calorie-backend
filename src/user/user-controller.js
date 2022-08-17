@@ -8,10 +8,6 @@ const register = async (req, res) => {
   try {
     const { email, password, firstName, lastName } = req.body;
 
-    if (!email || !password) {
-      throw new Error(Error.INVALID_INPUTS);
-    }
-
     const user = await UserService.findOneUser({ email });
 
     if (!isEmpty(user)) {
@@ -25,6 +21,7 @@ const register = async (req, res) => {
       firstName,
       lastName,
     });
+
     return res.status(200).json(created);
   } catch (err) {
     console.log('Error caught: ', err);

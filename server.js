@@ -19,9 +19,6 @@ const basePath = `/${process.env.API_PATH}`;
 dotenv.config();
 const app = express();
 
-// initialize mongo connection
-mongo();
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -40,7 +37,9 @@ process.on('uncaughtException', function (err) {
   console.error(err);
   console.log('Node NOT Exiting...');
 });
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+(async () => {
+  await mongo();
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+  });
+})();

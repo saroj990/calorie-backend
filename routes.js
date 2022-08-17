@@ -1,6 +1,6 @@
 import express from 'express';
-import authenticatedRoutes from './routes/authenticatedRoutes';
-import unAuthenticatedRoutes from './routes/unAuthenticatedRoutes';
+import authenticatedRoutes from './routes/authenticated-routes';
+import unAuthenticatedRoutes from './routes/unauthenticate-routes';
 
 import { isLoggedIn } from './middlewares/auth';
 
