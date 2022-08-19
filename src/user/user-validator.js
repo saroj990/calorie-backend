@@ -1,8 +1,12 @@
 import { Joi } from 'celebrate';
 
-const userParams = {
+const loginSchema = {
   email: Joi.string().required(),
-  firstName: Joi.string().required(),
+  password: Joi.string().required(),
+};
+
+const registerSchema = {
+  ...loginSchema,
   firstName: Joi.string().required(),
   password: Joi.string().required(),
 };
@@ -10,12 +14,12 @@ const userParams = {
 export default {
   register: {
     body: Joi.object().keys({
-      ...userParams,
+      ...registerSchema,
     }),
   },
   login: {
     body: Joi.object().keys({
-      ...userParams,
+      ...loginSchema,
     }),
   },
 };
