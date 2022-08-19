@@ -7,11 +7,11 @@ const validate = schemaValidator.getEndPointValidator(itemvalidator);
 const router = express.Router();
 
 router
-  .route('/calorie')
+  .route('/item')
   .get(ItemController.getItems)
   .post(validate(ItemController.createItem));
 router
-  .route('/calorie/:id')
+  .route('/item/:id')
   .get(validate(ItemController.getItemById))
   .put(validate(ItemController.updateItem))
   .delete(validate(ItemController.deleteItem));
