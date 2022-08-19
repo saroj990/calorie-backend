@@ -15,5 +15,5 @@ In order to make the seed the data to MongoDB, just visit `127.0.0.1:3000/api/ca
 
 Once the seeding is done, you could visit `127.0.0.1:3000/api/calorie` to view all the food items available and it's macro nutrient information.
 
-NOTE: Since it is difficult to initiate PUT/PATCH/POST/DELETE dierctly from the browser, I recommend you to use a API client like [postman](https://www.postman.com/) or [hopscotch](https://hoppscotch.io/).
+NOTE: Since it is difficult to initiate PUT/PATCH/POST/DELETE dierctly from the browser, I recommend you to use an API client like [postman](https://www.postman.com/) or [hopscotch](https://hoppscotch.io/).
 
