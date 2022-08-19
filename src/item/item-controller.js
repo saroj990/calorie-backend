@@ -1,9 +1,9 @@
 import seederService from '../seeder-service';
 import ItemService from './item-service';
-import ItemValidatorSchema from './item-validator';
+
 const createItem = async (req, res) => {
   try {
-    const item  = await ItemValidatorSchema.validateAsync(req.body);
+    const item = req.body;
     const created = await ItemService.createItem(item);
     return res.json(created);
   } catch (error) {
@@ -54,8 +54,7 @@ const seed = async (req, res) => {
 const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
-    if (!id) throw new Error('id or payload is empty');
-    const item  = await ItemValidatorSchema.validateAsync(req.body);
+    const item = req.body;
     const updated = await ItemService.updateItem(id, item);
     return res.json(updated);
   } catch (error) {
