@@ -4,7 +4,7 @@ import { Error } from '../util/constants';
 
 export const isLoggedIn = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization;
     const user = await jwt.verifyToken(token);
 
     if (isEmpty(user)) {

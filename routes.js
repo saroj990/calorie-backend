@@ -6,7 +6,7 @@ import { isLoggedIn } from './middlewares/auth';
 
 const router = express.Router();
 
-router.use('/profile', unAuthenticatedRoutes);
+router.use('/v1/auth', unAuthenticatedRoutes);
 router.use('/', isLoggedIn, ...authenticatedRoutes);
 
 export default router;
