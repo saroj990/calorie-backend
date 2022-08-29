@@ -12,7 +12,6 @@ const validate = (schema, options = JOI_OPTIONS) => celebrate(schema, options);
 export default {
   getEndPointValidator(validator) {
     const validateEndpoint = (endpoint) => {
-      debugger;
       const endpointValidator = validator[endpoint.name];
       return [
         ...(endpointValidator ? [validate(endpointValidator)] : []),

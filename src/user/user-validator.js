@@ -8,7 +8,7 @@ const loginSchema = {
 const registerSchema = {
   ...loginSchema,
   firstName: Joi.string().required(),
-  password: Joi.string().required(),
+  lastName: Joi.string().required(),
 };
 
 export default {

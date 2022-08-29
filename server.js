@@ -13,13 +13,14 @@ const corsOptions = {
 };
 
 // enable cors requests
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 const basePath = `/${process.env.API_PATH}`;
 
 dotenv.config();
 const app = express();
 
 // parse application/x-www-form-urlencoded
+app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
@@ -30,7 +31,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.use(cors(corsOptions));
 app.use(morgan(':method :url :status - :response-time ms'));
 
 process.on('uncaughtException', function (err) {
