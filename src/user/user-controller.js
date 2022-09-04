@@ -1,6 +1,6 @@
 import UserService from './user-service';
 import { isEmpty } from 'lodash';
-import { Error, ROLES } from '../../util/constants';
+import { API_ERRORS, ROLES } from '../../util/constants';
 import bcrypt from 'bcryptjs';
 import jwt from '../../util/jwt';
 
@@ -11,7 +11,7 @@ const register = async (req, res) => {
     const user = await UserService.findOneUser({ email });
 
     if (!isEmpty(user)) {
-      return res.status(409).send(Error.USER_EXISTS);
+      return res.status(409).send(API_ERRORS.USER_EXISTS);
     }
 
     const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
@@ -35,7 +35,7 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      throw new Error(Error.INVALID_INPUTS);
+      throw new Error(API_ERRORS.INVALID_INPUTS);
     }
 
     const user = await UserService.findOneUser({ email });
@@ -44,7 +44,7 @@ const login = async (req, res) => {
       isEmpty(user) ||
       (user.password && !bcrypt.compareSync(password, user.password))
     ) {
-      return res.status(500).send(Error.INVALID_CREDENTIALS);
+      return res.status(500).send(API_ERRORS.INVALID_CREDENTIALS);
     }
 
     const token = await jwt.signToken({
@@ -71,7 +71,7 @@ const getUser = async (req, res) => {
   const id = req?.params?.id || req?.body?.id;
   try {
     if (!id) {
-      throw new Error(Error.INVALID_INPUTS);
+      throw new Error(API_ERRORS.INVALID_INPUTS);
     }
     const user = await UserService.findById(id);
     return res.status(200).json({ user });
@@ -87,10 +87,10 @@ const updateRole = async (req, res) => {
   try {
     const { role } = req.body;
     const roles = Object.values(ROLES);
-    if (!roles || !roles.includes(role)) {
-      throw new Error(Error.INVALID_ROLE);
-    }
 
+    if (!roles || !roles.includes(role)) {
+      throw new Error(API_ERRORS.INVALID_ROLE);
+    }
     await User;
   } catch (err) {
     console.log(err);
@@ -103,4 +103,5 @@ export default {
   login,
   getUser,
   deleteUser,
+  updateRole,
 };

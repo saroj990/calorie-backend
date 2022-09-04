@@ -5,7 +5,7 @@ export const MEAL_TYPES = {
   DINNER: 'dinner',
 };
 
-export const Error = {
+export const API_ERRORS = {
   INVALID_INPUTS: 'Invlaid arguments',
   USER_EXISTS: 'User already exists',
   INVALID_CREDENTIALS: 'Invalid credentials',

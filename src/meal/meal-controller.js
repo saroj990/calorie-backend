@@ -1,4 +1,3 @@
-import MealSchema from './meal-validator';
 import MealService from './meal-service';
 
 const getMeals = async (req, res) => {
