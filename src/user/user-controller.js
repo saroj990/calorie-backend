@@ -54,7 +54,13 @@ const login = async (req, res) => {
       lastName: user.lastName,
     });
     res.cookie('token', token, { maxAge: 24 * 60 * 60 });
-    res.json({ token }).end();
+    res
+      .json({
+        token,
+        email: user.email,
+        fullName: `${user.firstName} ${user.lastName}`,
+      })
+      .end();
   } catch (err) {
     console.log(err);
     return res.status(500).send(err.message);
